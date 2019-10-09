@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+    <head>
+        <% include ../partials/header.ejs %>
+        <title>Tokimon: Create</title>
+    </head>
+    <body>
+        <% include ../partials/nav.ejs %>
+
+        <div align="center" class="container">
+            <h1>Add a Tokimon!</h1>
+
+            <form id="create-form" action="/add" method="POST" autocomplete="off">
+                <div class="form-group col-md-6">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name_input" 
+                name="name" aria-describedby="name_help" required="required">
+                <small id="name_help" class="form-text text-muted">
+                The name of the Tokimon.
+                </small>
+                <div class="invalid-feedback">Alphabetic characters only.</div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="height_input">Height</label>
+                    <input type="text" class="form-control" id="height_input" 
+                    name="height" required="required" aria-describedby="height_help">
+                    <small id="height_help" class="form-text text-muted">
+                    Height of the Tokimon.
+                    </small>
+                    <div class="invalid-feedback">Enter a numeric value.></div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="weight_input">Weight</label>
+                    <input type="text" class="form-control" id="weight_input" 
+                    name="weight" required="required" aria-describedby="weight_help">
+                    <small id="weight_help" class="form-text text-muted">
+                    Weight of the Tokimon.
+                    </small>
+                    <div class="invalid-feedback">Enter a numeric value.></div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="fly_input">Fly Level</label>
+                    <input type="text" class="form-control" id="fly_input" 
+                    name="fly" required="required" aria-describedby="fly_help">
+                    <small id="fly_help" class="form-text text-muted">
+                    Fly level of the Tokimon
+                    </small>
+                    <div class="invalid-feedback">Enter a numeric value.></div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="fight_input">Fight Level</label>
+                    <input type="text" class="form-control" id="fight_input" 
+                    name="fight" required="required" aria-describedby="fight_help">
+                    <small id="fight_help" class="form-text text-muted">
+                    Fight level of the Tokimon
+                    </small>
+                    <div class="invalid-feedback">Enter a numeric value.></div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="fire_input">Fire Level</label>
+                    <input type="text" class="form-control" id="fire_input" 
+                    name="fire" required="required" aria-describedby="fire_help">
+                    <small id="fire_help" class="form-text text-muted">
+                    Fire level of the Tokimon
+                    </small>
+                    <div class="invalid-feedback">Enter a numeric value.></div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="Water_input">Water Level</label>
+                    <input type="text" class="form-control" id="water_input" 
+                    name="water" required="required" aria-describedby="water_help">
+                    <small id="water_help" class="form-text text-muted">
+                    Water level of the Tokimon
+                    </small>
+                    <div class="invalid-feedback">Enter a numeric value.></div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="electric_input">Electric Level</label>
+                    <input type="text" class="form-control" id="electric_input" 
+                    name="electric" required="required" aria-describedby="electric_help">
+                    <small id="electric_help" class="form-text text-muted">
+                    Electric level of the Tokimon
+                    </small>
+                    <div class="invalid-feedback">Enter a numeric value.></div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="ice_input">Ice Level</label>
+                    <input type="text" class="form-control" id="ice_input" 
+                    name="ice" required="required" aria-describedby="ice_help">
+                    <small id="ice_help" class="form-text text-muted">
+                    Ice level of the Tokimon
+                    </small>
+                    <div class="invalid-feedback">Enter a numeric value.></div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="trainer_name_input">Trainer Name</label>
+                    <input type="text" class="form-control" id="trainer_name_input" 
+                    name="trainer_name" autocomplete="off" aria-describedby="trainer_name_help"
+                        required="required">
+                    <small id="trainer_name_help" class="form-text text-muted">
+                    The name of the trainer of the Tokimon
+                    </small>
+                </div>
+
+                <button type="submit" id="create_submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        
+    </body>
+</html>

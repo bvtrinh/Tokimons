@@ -11,6 +11,6 @@ CREATE TABLE tokis(
     water REAL,
     electic REAL,
     ice REAL,
-    total REAL
+    total REAL,
     trainer_name TEXT
 );
