@@ -16,9 +16,46 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => res.render('pages/index'));
 app.get('/create', (req, res) => res.render('pages/create'));
+// app.get('/search', (req, res) => res.render('pages/search'));
+app.get('/search', async(req, res) => {
+
+    try {
+        // No query sent, just returning search page with no results
+        var search_val = req.query.search_val;
+        if (search_val == '') {
+            var search_query = `SELECT * FROM tokis`; 
+            const client = await pool.connect();
+            var results = await client.query(search_query);
+            results = max_attr(results);
+            
+            res.render('pages/search', results);
+            client.release();
+        }
+        else if (search_val == null) {
+            res.render('pages/search');
+        }
+        else {
+            var search_query = `SELECT * FROM tokis WHERE name LIKE '%${search_val}%'`;
+            const client = await pool.connect();
+            const results = await client.query(search_query);
+            res.render('pages/search', results);
+            client.release();
+        }
+
+    }
+    catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
+app.get('/query', async(req, res) => {
+    console.log(req.query.searchValue);
+    res.render('pages/search');
+});
 app.post('/add', async(req, res) => {
     try {
         var total = sum_levels(req.body);
+        console.log(req.body);
         console.log('this is the total');
         console.log(total);
         var insert_query = `INSERT INTO tokis (
@@ -36,7 +73,7 @@ app.post('/add', async(req, res) => {
             '${req.body.trainer_name}'
             )`;
 
-        const client = await pool.connect()
+        const client = await pool.connect();
         const result = await client.query(insert_query);
         req.body.total = total;
         res.render('pages/insert-success', req.body);
@@ -67,4 +104,30 @@ function sum_levels(body) {
         sum += parseFloat(body[element]);
     });
     return sum;
+}
+
+function max_attr(results) {
+
+    var types = ['fly', 'fight','fire', 'water', 'electric', 'ice'];
+    var colors = {
+        'fly': 'grey',
+        'fight': 'red',
+        'fire': 'orange',
+        'water': 'teal',
+        'electric': 'yellow',
+        'ice': 'cyan'
+    };
+    var max = -1;
+    results.rows.forEach(row => {
+        types.forEach(col => {
+            if (row[col] > max) {
+                max = row[col];
+                attr_max = col;
+            }
+        });
+        max = -1;
+        row.color = colors[attr_max];
+        console.log(attr_max)
+    });
+    return results;
 }
