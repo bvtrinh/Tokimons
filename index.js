@@ -55,8 +55,6 @@ app.post('/add', async(req, res) => {
     try {
         var total = sum_levels(req.body);
         var sprite = cool();
-        console.log('this is the sprite');
-        console.log(sprite);
 
         var insert_query = `INSERT INTO tokis (
             name, sprite, height, weight, fly, fight, fire, 
@@ -84,6 +82,26 @@ app.post('/add', async(req, res) => {
         res.send("Error " + err);
     }
 });
+app.get('/levels/:id', async(req, res) => {
+    try {
+        var id = req.params.id;
+        var view_query = `SELECT fly, fight, fire, water, electric, ice FROM tokis WHERE id=${id}`;
+        const client = await pool.connect();
+        const result = await client.query(view_query);
+        client.release();
+        var levels = [];
+        for (level in result.rows[0]) {
+            levels.push(result.rows[0][level]);
+        }
+
+        res.send(levels);
+    }
+    catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
+
 app.get('/delete/:id', async(req, res) => {
 
     try {
@@ -103,9 +121,9 @@ app.get('/toki/:id', async(req, res) => {
 
     try {
         var id = req.params.id;
-        var delete_query = `SELECT * FROM tokis WHERE id=${id}`;
+        var view_query = `SELECT * FROM tokis WHERE id=${id}`;
         const client = await pool.connect();
-        const result = await client.query(delete_query);
+        const result = await client.query(view_query);
         result.rows[0].total = sum_levels(result.rows[0]);
         res.render('pages/view_toki', result.rows[0]);
         client.release();

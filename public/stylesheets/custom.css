@@ -30,3 +30,8 @@ h1 {
 .footer {
     margin: 10em;
 }
+
+.chart {
+    width: 70%;
+    margin: 0 auto;
+}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <head>
         <% include ../partials/header.ejs %>
-        <title>Tokimon: Create</title>
+        <title>Tokimon: View</title>
     </head>
     <body>
         <% include ../partials/nav.ejs %>
@@ -11,6 +11,7 @@
             <h1 class="title-toki"><%= name%></h1>
             <h4><%= sprite %></h2>
             <h4>Trainer: <%= trainer_name %></h2>
+            <h4>Total Level: <%= total %></h2>
             <div class="modifiers">
                 <a href="/edit/<%= id %>"" class="btn btn-info">Edit</a>
                 <!-- Button trigger modal -->
@@ -19,16 +20,7 @@
                 </button>
             </div>
 
-            <canvas id="myChart" width="1000" height="1000"></canvas>
-            <div class="">
-                <li>Fly: <%= fly %></li>
-                <li>Fight: <%= fight %></li>
-                <li>Fire: <%= fire %></li>
-                <li>Water: <%= water %></li>
-                <li>Electric: <%= electric %></li>
-                <li>Ice: <%= ice %></li>
-                <li>Total: <%= total %></li>
-            </div>
+            <canvas class="chart" id="myChart" width="500" height=500"></canvas>
 
             <!-- Modal -->
             <div class="modal fade" id="del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -51,9 +43,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
+        <input type="hidden" id="toki_id" value="<%= id %>">
         <div class="footer"></div>
     </body>
-    <script src="/js/charts.js"></script>
+    <script type="text/javascript" src="/js/charts.js"></script>
 </html>
