@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <head>
+        <% include ../partials/header.ejs %>
+        <title>Tokimon: Create</title>
+    </head>
+    <body>
+        <% include ../partials/nav.ejs %>
+
+        <div class="container">
+
+            <h1 class="title-toki"><%= name%></h1>
+            <h4><%= sprite %></h2>
+            <h4>Trainer: <%= trainer_name %></h2>
+            <div class="modifiers">
+                <a href="/edit/<%= id %>"" class="btn btn-info">Edit</a>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#del-modal">
+                Delete
+                </button>
+            </div>
+
+            <canvas id="myChart" width="1000" height="1000"></canvas>
+            <div class="">
+                <li>Fly: <%= fly %></li>
+                <li>Fight: <%= fight %></li>
+                <li>Fire: <%= fire %></li>
+                <li>Water: <%= water %></li>
+                <li>Electric: <%= electric %></li>
+                <li>Ice: <%= ice %></li>
+                <li>Total: <%= total %></li>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Name: <%= name %></p>
+                            <p>Trainer: <%= trainer_name %></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <a href="/delete/<%= id %>" class="btn btn-danger">Yes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer"></div>
+    </body>
+    <script src="/js/charts.js"></script>
+</html>

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
     <head>
         <% include ../partials/header.ejs %>
-        <title>Tokimon: Create</title>
+        <title>Tokimon: Update</title>
     </head>
     <body>
         <% include ../partials/nav.ejs %>
 
         <div align="center" class="container">
-            <h1>Add a Tokimon!</h1>
+            <h1>Edit Tokimon</h1>
 
-            <form id="create-form" action="/add" method="POST">
+            <form action="/update/<%= id %>" method="POST">
                 <div class="form-group col-md-6">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name_input" 
-                name="name" aria-describedby="name_help" required="required">
+                name="name" aria-describedby="name_help" required="required" value="<%= name %>">
                 <small id="name_help" class="form-text text-muted">
                 The name of the Tokimon.
                 </small>
@@ -23,7 +23,7 @@
                 <div class="form-group col-md-6">
                     <label for="height_input">Height</label>
                     <input type="number" class="form-control" id="height_input" 
-                    name="height" required="required" aria-describedby="height_help">
+                    name="height" required="required" aria-describedby="height_help" value="<%= height %>">
                     <small id="height_help" class="form-text text-muted">
                     Height of the Tokimon.
                     </small>
@@ -33,7 +33,7 @@
                 <div class="form-group col-md-6">
                     <label for="weight_input">Weight</label>
                     <input type="number" class="form-control" id="weight_input" 
-                    name="weight" required="required" aria-describedby="weight_help">
+                    name="weight" required="required" aria-describedby="weight_help" value="<%= weight %>">
                     <small id="weight_help" class="form-text text-muted">
                     Weight of the Tokimon.
                     </small>
@@ -43,7 +43,7 @@
                 <div class="form-group col-md-6">
                     <label for="fly_input">Fly Level</label>
                     <input type="number" class="form-control" id="fly_input" 
-                    name="fly" required="required" aria-describedby="fly_help">
+                    name="fly" required="required" aria-describedby="fly_help" value="<%= fly %>">
                     <small id="fly_help" class="form-text text-muted">
                     Fly level of the Tokimon
                     </small>
@@ -53,7 +53,7 @@
                 <div class="form-group col-md-6">
                     <label for="fight_input">Fight Level</label>
                     <input type="number" class="form-control" id="fight_input" 
-                    name="fight" required="required" aria-describedby="fight_help">
+                    name="fight" required="required" aria-describedby="fight_help" value="<%= fight %>">
                     <small id="fight_help" class="form-text text-muted">
                     Fight level of the Tokimon
                     </small>
@@ -63,7 +63,7 @@
                 <div class="form-group col-md-6">
                     <label for="fire_input">Fire Level</label>
                     <input type="number" class="form-control" id="fire_input" 
-                    name="fire" required="required" aria-describedby="fire_help">
+                    name="fire" required="required" aria-describedby="fire_help" value="<%= fire %>">
                     <small id="fire_help" class="form-text text-muted">
                     Fire level of the Tokimon
                     </small>
@@ -73,7 +73,7 @@
                 <div class="form-group col-md-6">
                     <label for="Water_input">Water Level</label>
                     <input type="number" class="form-control" id="water_input" 
-                    name="water" required="required" aria-describedby="water_help">
+                    name="water" required="required" aria-describedby="water_help" value="<%= water %>">
                     <small id="water_help" class="form-text text-muted">
                     Water level of the Tokimon
                     </small>
@@ -83,7 +83,7 @@
                 <div class="form-group col-md-6">
                     <label for="electric_input">Electric Level</label>
                     <input type="number" class="form-control" id="electric_input" 
-                    name="electric" required="required" aria-describedby="electric_help">
+                    name="electric" required="required" aria-describedby="electric_help" value="<%= electric %>">
                     <small id="electric_help" class="form-text text-muted">
                     Electric level of the Tokimon
                     </small>
@@ -93,7 +93,7 @@
                 <div class="form-group col-md-6">
                     <label for="ice_input">Ice Level</label>
                     <input type="number" class="form-control" id="ice_input" 
-                    name="ice" required="required" aria-describedby="ice_help">
+                    name="ice" required="required" aria-describedby="ice_help" value="<%= ice %>">
                     <small id="ice_help" class="form-text text-muted">
                     Ice level of the Tokimon
                     </small>
@@ -103,7 +103,7 @@
                 <div class="form-group col-md-6">
                     <label for="trainer_name_input">Trainer Name</label>
                     <input type="text" class="form-control" id="trainer_name_input" 
-                    name="trainer_name" aria-describedby="trainer_name_help"
+                    name="trainer_name" aria-describedby="trainer_name_help" value="<%= trainer_name %>"
                         required="required">
                     <small id="trainer_name_help" class="form-text text-muted">
                     The name of the trainer of the Tokimon
@@ -113,6 +113,7 @@
                 <button type="submit" id="create_submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+        
         <div class="footer"></div>
     </body>
 </html>

@@ -1,6 +1,6 @@
 h1 {
 
-    padding: 20px;
+    padding: 30px;
 
 }
 
@@ -16,4 +16,17 @@ h1 {
 
 .card-spacing {
     margin: 1em;
+}
+
+.modifiers {
+    text-align: right;
+}
+
+.title-toki {
+    /* top, right, bot, left */
+    padding: 20px 0px 5px 0px;
+}
+
+.footer {
+    margin: 10em;
 }

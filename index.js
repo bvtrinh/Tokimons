@@ -16,7 +16,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.get('/', (req, res) => res.render('pages/index'));
 app.get('/create', (req, res) => res.render('pages/create'));
-// app.get('/search', (req, res) => res.render('pages/search'));
 app.get('/search', async(req, res) => {
 
     try {
@@ -27,7 +26,7 @@ app.get('/search', async(req, res) => {
             const client = await pool.connect();
             var results = await client.query(search_query);
             results = max_attr(results);
-            
+            console.log(results);
             res.render('pages/search', results);
             client.release();
         }
@@ -55,13 +54,15 @@ app.get('/query', async(req, res) => {
 app.post('/add', async(req, res) => {
     try {
         var total = sum_levels(req.body);
-        console.log(req.body);
-        console.log('this is the total');
-        console.log(total);
+        var sprite = cool();
+        console.log('this is the sprite');
+        console.log(sprite);
+
         var insert_query = `INSERT INTO tokis (
-            name, height, weight, fly, fight, fire, 
+            name, sprite, height, weight, fly, fight, fire, 
             water, electric, ice, total, trainer_name)
-            VALUES ('${req.body.name}', ${req.body.height}, 
+            VALUES ('${req.body.name}', '${sprite}',
+             ${req.body.height}, 
             ${req.body.weight},
             ${req.body.fly},
             ${req.body.fight},
@@ -71,20 +72,98 @@ app.post('/add', async(req, res) => {
             ${req.body.ice},
             ${total},
             '${req.body.trainer_name}'
-            )`;
+            ) RETURNING id`;
 
         const client = await pool.connect();
         const result = await client.query(insert_query);
         req.body.total = total;
-        res.render('pages/insert-success', req.body);
+        res.redirect('/toki/' + result.rows[0].id );
         client.release();
     } catch (err) {
         console.error(err);
         res.send("Error " + err);
     }
 });
+app.get('/delete/:id', async(req, res) => {
+
+    try {
+        var id = req.params.id;
+        var toki_query = `DELETE FROM tokis WHERE id=${id}`;
+        const client = await pool.connect();
+        const result = await client.query(toki_query);
+        res.redirect('/');
+        client.release();
+    }
+    catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
+app.get('/toki/:id', async(req, res) => {
+
+    try {
+        var id = req.params.id;
+        var delete_query = `SELECT * FROM tokis WHERE id=${id}`;
+        const client = await pool.connect();
+        const result = await client.query(delete_query);
+        result.rows[0].total = sum_levels(result.rows[0]);
+        res.render('pages/view_toki', result.rows[0]);
+        client.release();
+
+    }
+    catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
+
+app.get('/edit/:id', async(req, res) => {
+
+    try {
+        var id = req.params.id;
+        var toki_query = `SELECT *  FROM tokis WHERE id=${id}`;
+        const client = await pool.connect();
+        const result = await client.query(toki_query);
+        res.render('pages/edit-form',result.rows[0]);
+        client.release();
+    }
+    catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
+
+app.post('/update/:id', async(req, res) => {
+
+    try {
+        var id = req.params.id;
+        var total = sum_levels(req.body);
+        var update_query = `UPDATE tokis SET 
+            name = '${req.body.name}', 
+            height = ${req.body.height}, 
+            weight = ${req.body.weight},
+            fly = ${req.body.fly},
+            fight = ${req.body.fight},
+            fire = ${req.body.fire},
+            water = ${req.body.water},
+            electric = ${req.body.electric},
+            ice = ${req.body.ice},
+            total = ${total},
+            trainer_name = '${req.body.trainer_name}'
+            WHERE id = ${id}
+        `;
+        const client = await pool.connect();
+        const result = await client.query(update_query);
+        res.redirect('/toki/' + id);
+        client.release();
+    }
+    catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
+
 app.get('/cool', (req, res) => res.send(cool()));
-app.get('/times', (req, res) => res.send(showTimes()));
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 
