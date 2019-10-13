@@ -1,8 +1,8 @@
 {
-  "name": "Start on Heroku: Node.js",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/heroku/node-js-getting-started",
-  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
-  "keywords": ["node", "express", "heroku"],
-  "image": "heroku/nodejs"
+  "name": "Tokimon",
+  "description": "A Node.js app using Express 4 that tracks Tokimons",
+  "repository": "https://csil-git1.cs.surrey.sfu.ca/bvtrinh/276-tokimons",
+  "logo": "/public/img/t-logo.png",
+  "keywords": ["node", "express", "heroku","bootstrap","chartjs"],
+  "image": "/public/img/t-logo.png"
 }

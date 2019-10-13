@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
+  "name": "tokimon",
   "version": "0.3.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "A Node.js app using Express 4 that tracks Tokimons",
   "engines": {
     "node": "10.x"
   },
@@ -22,12 +22,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://csil-git1.cs.surrey.sfu.ca/bvtrinh/276-tokimons"
   },
   "keywords": [
     "node",
     "heroku",
-    "express"
-  ],
-  "license": "MIT"
+    "express",
+    "bootstrap",
+    "chartjs"
+  ]
 }
