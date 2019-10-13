@@ -13,6 +13,7 @@
 
     <div align="center" >
         <form action="/search" method="GET" class="form-inline active-purple-4 justify-content-center">
+
             <!-- Search form -->
             <div class="input-group col-lg-6 col-md-8">
                 <input name="search_val" class="form-control" type="text" placeholder="Search" aria-label="Search" autofocus>
@@ -26,27 +27,25 @@
     <div align="center">
         <% if (typeof rows !== 'undefined') { %>
             <div class="row">
-
             <% rows.forEach(function(r) { %>
+
                 <div class="col-lg-3 col-md-6">
                     <div class="card card-spacing" style="width: 15rem;">
-                    <div class="card-bg" style="background: <%= r.color %>">
-                        <div class="total-font"><%= r.total %></div>
-                    </div>
+                        <div class="card-bg" style="background: <%= r.color %>">
+                            <div class="total-font"><%= r.total %></div>
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title"><a href="/toki/<%= r.id %>"><%= r.name%></a></h5>
                             <p class="card-text"><%= r.sprite %></p>
                         </div>
                     </div>
                 </div>
+
             <% }); %>
             </div>
         <% } %>
     </div>
-
-
 </div>
-
 <div class="footer"></div>
 </body>
 </html>

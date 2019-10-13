@@ -19,6 +19,7 @@
 
                 <div class="modifiers col-lg-2 col-md-3 col-sm-4 col-xs-3">
                     <a href="/edit/<%= id %>"" class="btn btn-outline-info">Edit</a>
+
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-outline-danger" data-toggle="modal" 
                     data-target="#del-modal">Delete</button>
@@ -26,32 +27,42 @@
 
             </div>
 
+            <!-- CHART -->
             <canvas class="chart" id="myChart" width="500" height=500"></canvas>
 
-            <!-- Modal -->
-            <div class="modal fade" id="del-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- START MODAL -->
+            <div class="modal fade" id="del-modal" tabindex="-1" role="dialog" 
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
+
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete?</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Are you sure you want to delete?</h5>
+                            <button type="button" class="close" data-dismiss="modal" 
+                            aria-label="Close"> <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+
                         <div class="modal-body">
-                            <p>Name: <%= name %></p>
-                            <p>Trainer: <%= trainer_name %></p>
+                            <ul>
+                            <li>Name: <%= name %></li>
+                            <li>Trainer: <%= trainer_name %></li>
+                            </ul>
                         </div>
+
                         <div align="center" class="del-modal-btn">
                             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">No</button>
                             <a href="/delete/<%= id %>" class="btn btn-outline-danger">Yes</a>
                         </div>
+
                     </div>
                 </div>
             </div>
             <!-- END MODAL -->
 
         </div>
+        <!-- Used with AJAX call -->
         <input type="hidden" id="toki_id" value="<%= id %>">
         <div class="footer"></div>
     </body>
