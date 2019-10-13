@@ -14,7 +14,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.get('/', (req, res) => res.render('pages/index'));
+app.get('/', async(req, res) => {
+
+    try {
+            var search_query = `SELECT * FROM tokis ORDER BY total DESC LIMIT 4`; 
+            const client = await pool.connect();
+            var results = await client.query(search_query);
+            results = max_attr(results);
+            res.render('pages/index', results);
+            client.release();
+    }
+    catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
 app.get('/create', (req, res) => res.render('pages/create'));
 app.get('/search', async(req, res) => {
 
@@ -36,6 +50,7 @@ app.get('/search', async(req, res) => {
             var search_query = `SELECT * FROM tokis WHERE name LIKE '%${search_val}%'`;
             const client = await pool.connect();
             const results = await client.query(search_query);
+            results = max_attr(results);
             res.render('pages/search', results);
             client.release();
         }
@@ -49,7 +64,7 @@ app.get('/search', async(req, res) => {
 app.post('/add', async(req, res) => {
     try {
         var total = sum_levels(req.body);
-        var sprite = cool();
+        var sprite = cool().slice(0,27);
 
         var insert_query = `INSERT INTO tokis (
             name, sprite, height, weight, fly, fight, fire, 
@@ -202,12 +217,12 @@ function max_attr(results) {
 
     var types = ['fly', 'fight','fire', 'water', 'electric', 'ice'];
     var colors = {
-        'fly': 'grey',
-        'fight': 'red',
-        'fire': 'orange',
-        'water': 'teal',
-        'electric': 'yellow',
-        'ice': 'cyan'
+        'fly': 'rgba(192, 192, 192, 0.5)',
+        'fight': 'rgba(255, 99, 132, 0.5',
+        'fire': 'rgba(255, 140, 0, 0.5)',
+        'water': 'rgba(0, 191, 255, 0.5)',
+        'electric': 'rgba(255, 255, 0, 0.5)',
+        'ice': 'rgba(0, 255, 255, 0.5)'
     };
     var max = -1;
     results.rows.forEach(row => {
