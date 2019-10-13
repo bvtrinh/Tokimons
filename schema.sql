@@ -8,7 +8,7 @@ CREATE TABLE tokis(
     fight REAL,
     fire REAL,
     water REAL,
-    electic REAL,
+    electric REAL,
     ice REAL,
     total REAL,
     trainer_name TEXT

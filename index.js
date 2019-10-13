@@ -47,10 +47,10 @@ app.get('/search', async(req, res) => {
             var search_query = `SELECT * FROM tokis`; 
             const client = await pool.connect();
             var results = await client.query(search_query);
+
             // This alters the results object and ends another field to each row.
             // The maximum level of a Tokimon becomes its type and will correlate to a color.
             results = max_attr(results);
-
             res.render('pages/search', results);
             client.release();
         }
@@ -60,9 +60,10 @@ app.get('/search', async(req, res) => {
         }
         // Return Tokimons matching the search criteria
         else {
-            var search_query = `SELECT * FROM tokis WHERE name LIKE '%${search_val}%'`;
+            var search_query = `SELECT * FROM tokis WHERE LOWER(name) LIKE LOWER('%${search_val}%')`;
             const client = await pool.connect();
-            const results = await client.query(search_query);
+            var results = await client.query(search_query);
+
             // Adds color attribute to each Tokimon given their highest level
             results = max_attr(results);
             res.render('pages/search', results);

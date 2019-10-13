@@ -49,6 +49,10 @@ h1 {
     margin: 0.8em 0.5em;
 
 }
+
+.empty-search: {
+    text-align: center;
+}
 h2.index-cap {
     font-family: 'Quicksand', sans-serif;
 }
