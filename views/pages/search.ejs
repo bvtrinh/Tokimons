@@ -16,7 +16,7 @@
             <!-- Search form -->
             <div class="input-group col-lg-6 col-md-8">
                 <input name="search_val" class="form-control" type="text" placeholder="Search" aria-label="Search" autofocus>
-                <button type="submit" id="create_submit" class="btn btn-primary search-btn">
+                <button type="submit" id="create_submit" class="btn btn-outline-primary search-btn">
                 <i class="fa fa-search" aria-hidden="true"></i></button>
             </div>
 
@@ -28,13 +28,12 @@
             <div class="row">
 
             <% rows.forEach(function(r) { %>
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-6">
                     <div class="card card-spacing" style="width: 15rem;">
                         <div class="card-bg" style="background: <%= r.color %>"></div>
                         <div class="card-body">
-                            <h5 class="card-title"><%= r.name%></h5>
+                            <h5 class="card-title"><a href="/toki/<%= r.id %>"><%= r.name%></a></h5>
                             <p class="card-text"><%= r.sprite %></p>
-                            <a href="/toki/<%= r.id %>"" class="btn btn-primary">More info!</a>
                         </div>
                     </div>
                 </div>
