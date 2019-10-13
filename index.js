@@ -66,6 +66,7 @@ app.get('/search', async(req, res) => {
 
             // Adds color attribute to each Tokimon given their highest level
             results = max_attr(results);
+            results.search_val = search_val;
             res.render('pages/search', results);
             client.release();
         }
