@@ -143,10 +143,11 @@ app.get('/levels/:id', async(req, res) => {
         const result = await client.query(view_query);
         client.release();
         var levels = [];
+
+        // Create an array to send back to the request with the data of the levels
         for (level in result.rows[0]) {
             levels.push(result.rows[0][level]);
         }
-
         res.send(levels);
     }
     catch (err) {
@@ -159,8 +160,7 @@ app.get('/levels/:id', async(req, res) => {
 app.get('/edit/:id', async(req, res) => {
 
     try {
-        var id = req.params.id;
-        var toki_query = `SELECT *  FROM tokis WHERE id=${id}`;
+        var toki_query = `SELECT *  FROM tokis WHERE id=${req.params.id}`;
         const client = await pool.connect();
         const result = await client.query(toki_query);
         res.render('pages/edit-form', result.rows[0]);
@@ -172,6 +172,7 @@ app.get('/edit/:id', async(req, res) => {
     }
 });
 
+// Update Tokimon in database
 app.post('/update/:id', async(req, res) => {
 
     try {
@@ -202,6 +203,7 @@ app.post('/update/:id', async(req, res) => {
     }
 });
 
+// Delete a Tokimon, a modal will prompt to double check
 app.get('/delete/:id', async(req, res) => {
 
     try {
@@ -219,15 +221,7 @@ app.get('/delete/:id', async(req, res) => {
 });
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-showTimes = () => {
-    let result = ''
-    const times = process.env.TIMES || 5
-    for (i = 0; i < times; i++) {
-        result += i + ' '
-    }
-    return result;
-}
-
+// Total the levels of a Tokimon
 function sum_levels(body) {
     var types = ['fly', 'fight','fire', 'water', 'electric', 'ice'];
     var sum = 0;
@@ -237,6 +231,7 @@ function sum_levels(body) {
     return sum;
 }
 
+// Find the highest attribute of a Tokimon and add a color field to correlate with it
 function max_attr(results) {
 
     var types = ['fly', 'fight','fire', 'water', 'electric', 'ice'];
