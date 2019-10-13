@@ -2,24 +2,24 @@
 
 This app keeps track of all known Tokimons!
 
-A combination of HTML, CSS, Javascript, and the Express framework was used to create this.
-
 [Deployed on Heroku](https://shrouded-journey-27049.herokuapp.com/)
 
-![main-page](public/home.png)
+<img src="public/home.png" height="500" />
 
 ## Features
 
-![search-page](public/search.png)
+<img src="public/search.png" height="400" />
+<img src="public/toki-chart.png" height="400" />
+
 - Add a Tokimon to the database
 - Display all Tokimons with a null search
 - Show information about a specific Tokimon
 - Update a Tokimon's information
 - Delete a Tokimon
 
-## Additional Features
+### Additional Features
 
-![charts](public/toki-chart.png)
+
 - Match a Tokimon's highest attribute with a color 
 - Display a chart of a Tokimon's attributes
 - Responsive to mobile with Bootstrap
