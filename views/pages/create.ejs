@@ -13,7 +13,7 @@
                 <div class="form-group col-md-6">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name_input" 
-                name="name" aria-describedby="name_help" required="required">
+                name="name" aria-describedby="name_help" maxlength="25" required="required">
                 <small id="name_help" class="form-text text-muted">
                 The name of the Tokimon.
                 </small>
@@ -23,7 +23,7 @@
                 <div class="form-group col-md-6">
                     <label for="height_input">Height</label>
                     <input type="number" class="form-control" id="height_input" 
-                    name="height" required="required" aria-describedby="height_help">
+                    name="height" required="required" min="0" aria-describedby="height_help">
                     <small id="height_help" class="form-text text-muted">
                     Height of the Tokimon.
                     </small>
@@ -33,7 +33,7 @@
                 <div class="form-group col-md-6">
                     <label for="weight_input">Weight</label>
                     <input type="number" class="form-control" id="weight_input" 
-                    name="weight" required="required" aria-describedby="weight_help">
+                    name="weight" required="required" min="0" aria-describedby="weight_help">
                     <small id="weight_help" class="form-text text-muted">
                     Weight of the Tokimon.
                     </small>
@@ -104,7 +104,7 @@
                     <label for="trainer_name_input">Trainer Name</label>
                     <input type="text" class="form-control" id="trainer_name_input" 
                     name="trainer_name" aria-describedby="trainer_name_help"
-                        required="required">
+                        maxlength="25" required="required">
                     <small id="trainer_name_help" class="form-text text-muted">
                     The name of the trainer of the Tokimon
                     </small>
