@@ -1,15 +1,20 @@
 # 276 Tokimons
 
 This app keeps track of all known Tokimons!
+This projects shows off basic CRUD operations.
 
 [Deployed on Heroku](https://shrouded-journey-27049.herokuapp.com/)
 
-<img src="public/home.png" height="500" />
+<div align="center">
+    <img src="public/img/home.png" height="500" />
+</div>
 
 ## Features
 
-<img src="public/search.png" height="400" />
-<img src="public/toki-chart.png" height="400" />
+<div align="center">
+    <img src="public/img/search.png" height="400" style="margin: 0 5em 0 0" />
+    <img src="public/img/toki-chart.png" height="400"style="margin: 0 0 0 5em"/>
+</div>
 
 - Add a Tokimon to the database
 - Display all Tokimons with a null search
@@ -19,7 +24,7 @@ This app keeps track of all known Tokimons!
 
 ### Additional Features
 
-
+- An additional attribute of sprites are assigned when a Tokimon is added
 - Match a Tokimon's highest attribute with a color 
 - Display a chart of a Tokimon's attributes
 - Responsive to mobile with Bootstrap
@@ -28,7 +33,8 @@ This app keeps track of all known Tokimons!
 
 ## Built With
 
-- HTML, CSS Javascript
+- HTML, CSS, Javascript
+- [cool-ascii-face](https://www.npmjs.com/package/cool-ascii-faces) - Used for sprites
 - [Bootstrap 4](https://getbootstrap.com/) - Front-end library for the looks
 - [jQuery](https://jquery.com/) - AJAX request for data
 - [Chart.js](https://chartjs.org) - Display Tokimon levels in a pretty way
