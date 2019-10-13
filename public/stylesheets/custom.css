@@ -37,3 +37,17 @@ h1 {
     width: 70%;
     margin: 0 auto;
 }
+
+.total-font {
+    font-size:3em;
+    color: 	#808080;
+    margin: 0.8em 0.5em;
+
+}
+h2.index-cap {
+    font-family: 'Quicksand', sans-serif;
+}
+.jumbotron {
+
+    background: #EDF1FF;
+}
