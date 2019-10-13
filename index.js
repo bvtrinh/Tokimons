@@ -14,63 +14,85 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// Home page, will display the top 4 Tokimons
 app.get('/', async(req, res) => {
 
     try {
-            var search_query = `SELECT * FROM tokis ORDER BY total DESC LIMIT 4`; 
-            const client = await pool.connect();
-            var results = await client.query(search_query);
-            results = max_attr(results);
-            res.render('pages/index', results);
-            client.release();
-    }
-    catch (err) {
+        var search_query = `SELECT * FROM tokis ORDER BY total DESC LIMIT 4`; 
+        const client = await pool.connect();
+        var results = await client.query(search_query);
+        results = max_attr(results);
+        res.render('pages/index', results);
+        client.release();
+    } catch (err) {
         console.error(err);
         res.send("Error " + err);
     }
 });
-app.get('/create', (req, res) => res.render('pages/create'));
+
+/*
+ * Search page, can be in 1 of 3 states:
+ * initial search page, waiting for input
+ * null search, will display all Tokimons
+ * name search, that will display Tokimons matching search criteria
+ */
 app.get('/search', async(req, res) => {
 
     try {
-        // No query sent, just returning search page with no results
+
         var search_val = req.query.search_val;
+        // Null search, return all Tokimons
         if (search_val == '') {
             var search_query = `SELECT * FROM tokis`; 
             const client = await pool.connect();
             var results = await client.query(search_query);
+            // This alters the results object and ends another field to each row.
+            // The maximum level of a Tokimon becomes its type and will correlate to a color.
             results = max_attr(results);
+
             res.render('pages/search', results);
             client.release();
         }
+        // No query sent, just returning search page with no results
         else if (search_val == null) {
             res.render('pages/search');
         }
+        // Return Tokimons matching the search criteria
         else {
             var search_query = `SELECT * FROM tokis WHERE name LIKE '%${search_val}%'`;
             const client = await pool.connect();
             const results = await client.query(search_query);
+            // Adds color attribute to each Tokimon given their highest level
             results = max_attr(results);
             res.render('pages/search', results);
             client.release();
         }
-
     }
     catch (err) {
         console.error(err);
         res.send("Error " + err);
     }
 });
+
+// Create form
+app.get('/create', (req, res) => res.render('pages/create'));
+
+// Database call that will add to DB
 app.post('/add', async(req, res) => {
     try {
+
+        // Sum the levels of the Tokimon
         var total = sum_levels(req.body);
+
+        // Limit to length of 27 to the sprite
         var sprite = cool().slice(0,27);
 
         var insert_query = `INSERT INTO tokis (
             name, sprite, height, weight, fly, fight, fire, 
             water, electric, ice, total, trainer_name)
             VALUES ('${req.body.name}', '${sprite}',
-             ${req.body.height}, 
+            ${req.body.height}, 
             ${req.body.weight},
             ${req.body.fly},
             ${req.body.fight},
@@ -85,6 +107,8 @@ app.post('/add', async(req, res) => {
         const client = await pool.connect();
         const result = await client.query(insert_query);
         req.body.total = total;
+
+        // After adding a Tokimon, redirect to its info page
         res.redirect('/toki/' + result.rows[0].id );
         client.release();
     } catch (err) {
@@ -92,10 +116,29 @@ app.post('/add', async(req, res) => {
         res.send("Error " + err);
     }
 });
+
+// View all the information of a Tokimon
+app.get('/toki/:id', async(req, res) => {
+
+    try {
+        var view_query = `SELECT * FROM tokis WHERE id=${req.params.id}`;
+        const client = await pool.connect();
+        const result = await client.query(view_query);
+        result.rows[0].total = sum_levels(result.rows[0]);
+        res.render('pages/view_toki', result.rows[0]);
+        client.release();
+
+    }
+    catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
+
+// An AJAX call to pass the data of the Tokimon to the chart when viewing
 app.get('/levels/:id', async(req, res) => {
     try {
-        var id = req.params.id;
-        var view_query = `SELECT fly, fight, fire, water, electric, ice FROM tokis WHERE id=${id}`;
+        var view_query = `SELECT fly, fight, fire, water, electric, ice FROM tokis WHERE id=${req.params.id}`;
         const client = await pool.connect();
         const result = await client.query(view_query);
         client.release();
@@ -112,39 +155,7 @@ app.get('/levels/:id', async(req, res) => {
     }
 });
 
-app.get('/delete/:id', async(req, res) => {
-
-    try {
-        var id = req.params.id;
-        var toki_query = `DELETE FROM tokis WHERE id=${id}`;
-        const client = await pool.connect();
-        const result = await client.query(toki_query);
-        res.redirect('/');
-        client.release();
-    }
-    catch (err) {
-        console.error(err);
-        res.send("Error " + err);
-    }
-});
-app.get('/toki/:id', async(req, res) => {
-
-    try {
-        var id = req.params.id;
-        var view_query = `SELECT * FROM tokis WHERE id=${id}`;
-        const client = await pool.connect();
-        const result = await client.query(view_query);
-        result.rows[0].total = sum_levels(result.rows[0]);
-        res.render('pages/view_toki', result.rows[0]);
-        client.release();
-
-    }
-    catch (err) {
-        console.error(err);
-        res.send("Error " + err);
-    }
-});
-
+// Edit form to edit a Tokimon
 app.get('/edit/:id', async(req, res) => {
 
     try {
@@ -152,7 +163,7 @@ app.get('/edit/:id', async(req, res) => {
         var toki_query = `SELECT *  FROM tokis WHERE id=${id}`;
         const client = await pool.connect();
         const result = await client.query(toki_query);
-        res.render('pages/edit-form',result.rows[0]);
+        res.render('pages/edit-form', result.rows[0]);
         client.release();
     }
     catch (err) {
@@ -191,9 +202,22 @@ app.post('/update/:id', async(req, res) => {
     }
 });
 
-app.get('/cool', (req, res) => res.send(cool()));
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+app.get('/delete/:id', async(req, res) => {
 
+    try {
+        var id = req.params.id;
+        var toki_query = `DELETE FROM tokis WHERE id=${id}`;
+        const client = await pool.connect();
+        const result = await client.query(toki_query);
+        res.redirect('/');
+        client.release();
+    }
+    catch (err) {
+        console.error(err);
+        res.send("Error " + err);
+    }
+});
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 showTimes = () => {
     let result = ''

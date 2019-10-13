@@ -9,6 +9,11 @@ h1 {
 
 }
 
+.del-modal-btn {
+    margin: 10px 3px;
+
+}
+
 .card-bg {
     width: 15rem;
     height: 8rem;
