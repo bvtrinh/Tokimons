@@ -26,7 +26,6 @@ app.get('/search', async(req, res) => {
             const client = await pool.connect();
             var results = await client.query(search_query);
             results = max_attr(results);
-            console.log(results);
             res.render('pages/search', results);
             client.release();
         }
@@ -46,10 +45,6 @@ app.get('/search', async(req, res) => {
         console.error(err);
         res.send("Error " + err);
     }
-});
-app.get('/query', async(req, res) => {
-    console.log(req.query.searchValue);
-    res.render('pages/search');
 });
 app.post('/add', async(req, res) => {
     try {
@@ -224,7 +219,6 @@ function max_attr(results) {
         });
         max = -1;
         row.color = colors[attr_max];
-        console.log(attr_max)
     });
     return results;
 }

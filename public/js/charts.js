@@ -19,7 +19,7 @@ function render_chart(levels) {
         data: {
             labels: ['Fly', 'Fight', 'Fire', 'Water', 'Electric', 'Ice'],
             datasets: [{
-                label: 'Levels',
+                label: 'Level',
                 data: levels,
                 backgroundColor: [
                     'rgba(192, 192, 192, 0.2)',
