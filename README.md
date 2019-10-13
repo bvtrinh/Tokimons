@@ -34,7 +34,7 @@ This projects shows off basic CRUD operations.
 ## Built With
 
 - HTML, CSS, Javascript
-- [cool-ascii-face](https://www.npmjs.com/package/cool-ascii-faces) - Used for sprites
+- [cool-ascii-faces](https://www.npmjs.com/package/cool-ascii-faces) - Used for sprites
 - [Bootstrap 4](https://getbootstrap.com/) - Front-end library for the looks
 - [jQuery](https://jquery.com/) - AJAX request for data
 - [Chart.js](https://chartjs.org) - Display Tokimon levels in a pretty way
