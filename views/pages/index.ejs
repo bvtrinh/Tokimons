@@ -11,53 +11,44 @@
 
 <div class="jumbotron text-center">
   <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="/lang-logo.png">
-    </a>
-    <h1>Tokimons!</h1>
-    <p>Welcome to the world of Tokimons!</p>
+    <img src="/full-tokimon.png">
+    <hr>
+    <h2>Welcome to the world of Tokimons!</h2>
   </div>
 </div>
 <div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs" class="alert-link">Getting Started with Node on Heroku</a> tutorial.
-  </div>
-  <hr>
   <div class="row">
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
+    <div class="col-lg-6">
+      <h3><i class="fas fa-info"></i> What Are Tokimons?</h3>
       <ul>
-        <li>This app was deployed to Heroku, either using Git or by using <a href="https://github.com/heroku/node-js-getting-started">Heroku Button</a> on the repository.</li>
-
-        <li>When Heroku received the source code, it fetched all the dependencies in the <a href="https://github.com/heroku/node-js-getting-started/blob/master/package.json">package.json</a>, creating a deployable slug.</li>
-        <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the slug can be mounted and executed.</li>
-        <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
+        <li>The below are from <a href="https://www2.cs.sfu.ca/CourseCentral/276/bobbyc/a/asn2.pdf">this document</a></li>
+        <li>Tokimons are rare creatures found in Korea</li>
+        <li>They resemble rabbits and can only say their name</li>
+        <li>Each Tokimon is unique in shape, size and their abilities</li>
+        <li>A Tokimon's ability is measure by a level between 0 - 100
+          <ul>
+            <li>Fly</li>
+            <li>Fight</li>
+            <li>Fire</li>
+            <li>Water</li>
+            <li>Electric</li>
+            <li>Ice</li>
+          </ul>
+        </li>
+        <li>Tokimon trainers are needed to harness a Tokimon's abilities</li>
       </ul>
     </div>
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
+
+    <div class="col-lg-6">
+      <h3><i class="fas fa-info"></i> What is this app?</h3>
       <ul>
-        <li>If you are following the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started</a> guide, then please head back to the tutorial and follow the next steps!</li>
-        <li>If you deployed this app by deploying the Heroku Button, then in a command line shell, run:</li>
-        <ul>
-          <li><code>git clone https://github.com/heroku/node-js-getting-started.git</code> - this will create a local copy of the source code for the app</li>
-          <li><code>cd node-js-getting-started</code> - change directory into the local source code repository</li>
-          <li><code>heroku git:remote -a &lt;your-app-name></code> - associate the Heroku app with the repository</li>
-          <li>You'll now be set up to run the app locally, or <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#push-local-changes">deploy changes</a> to Heroku</li>
-        </ul>
-      </ul>
-      <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-      <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started with Node on Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/deploying-nodejs">Deploying Node Apps on Heroku</a></li>
+        <li>This web app is meant to track all Tokimons in existence</li>
+        <li>You can create, read, update and delete Tokimons here</li>
+        <li>Above are the top 5 Tokimons according to their total level</li>
+        <li>When you do look at a Tokimon's profile, you'll see in their abilities in a nicely displayed chart</li>
       </ul>
     </div>
   </div> <!-- row -->
-   <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
-  </div>
 </div>
 
 
