@@ -1,7 +1,7 @@
 # 276 Tokimons
 
 This app keeps track of all known Tokimons!
-This projects shows off basic CRUD operations.
+This project shows off basic CRUD operations.
 
 [Deployed on Heroku](https://shrouded-journey-27049.herokuapp.com/)
 
