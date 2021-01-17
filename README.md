@@ -3,8 +3,6 @@
 This app keeps track of all known Tokimons!
 This project shows off basic CRUD operations.
 
-[Deployed on Heroku](https://shrouded-journey-27049.herokuapp.com/)
-
 <div align="center">
     <img src="public/img/home.png" height="500" />
 </div>
